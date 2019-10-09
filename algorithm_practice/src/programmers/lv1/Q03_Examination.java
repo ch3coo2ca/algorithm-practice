@@ -21,24 +21,15 @@ public class Q03_Examination {
 				count[2]++;
 		}
 
-		if (count[1] == count[0] && count[2] == count[0]) {
-			answer = new int[3];
-			answer[0] = 1;
-			answer[1] = 2;
-			answer[2] = 3;
-		} else if (count[0] == count[1] && count[2] < count[0]) {
-			answer = new int[2];
-			answer[0] = 1;
-			answer[1] = 2;
-		} else if (count[0] == count[2] && count[1] < count[0]) {
-			answer = new int[2];
-			answer[0] = 1;
-			answer[1] = 3;
-		} else if (count[1] == count[2] && count[0] < count[1]) {
-			answer = new int[2];
-			answer[0] = 2;
-			answer[1] = 3;
-		} else {
+		if (count[1] == count[0] && count[2] == count[0])
+			return answer = new int[] { 1, 2, 3 };
+		else if (count[0] == count[1] && count[2] < count[0])
+			return answer = new int[] { 1, 2 };
+		else if (count[0] == count[2] && count[1] < count[0])
+			return answer = new int[] { 1, 3 };
+		else if (count[1] == count[2] && count[0] < count[1])
+			return answer = new int[] { 2, 3 };
+		else {
 			int max = count[0];
 			int num = 0;
 			for (int i = 1; i < 3; i++) {
@@ -48,11 +39,10 @@ public class Q03_Examination {
 				}
 			}
 
-			answer = new int[1];
-			answer[0] = num + 1;
+			answer = new int[] { num + 1 };
+			return answer;
 		}
 
-		return answer;
 	}
 
 	public static void main(String[] args) {
