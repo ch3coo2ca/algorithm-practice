@@ -1,8 +1,6 @@
 package com.baekjoon.bfs;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class Q1260 {
     public static ArrayList<Integer> [] list;
@@ -36,8 +34,11 @@ public class Q1260 {
 
         isVisited = new boolean[vertex+1];
         dfs(startNode);
+        System.out.println();
 
-        System.out.println(list[1].toString());
+        isVisited = new boolean[vertex+1];
+        bfs(startNode);
+        System.out.println();
     }
 
     private static void dfs(int node) {
@@ -51,7 +52,22 @@ public class Q1260 {
     }
 
     private static void bfs(int node) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(node);
 
+        isVisited[node] = true;
+
+
+        while(!queue.isEmpty()) {
+            int n = queue.poll();
+            System.out.print(n + " ");
+            for(int x : list[n]) {
+                if(!isVisited[x]) {
+                    isVisited[x] = true;
+                    queue.add(x);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
