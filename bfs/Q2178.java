@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/**
+ * @see /www.acmicpc.net/problem/2178
+ * Created by jylee on 2020-10-26
+ */
 public class Q2178 {
 
     public static int N, M;
@@ -11,32 +15,46 @@ public class Q2178 {
     public static boolean[][] isVisited;
     public static int[] dx = {-1, 1, 0, 0};
     public static int[] dy = {0, 0, -1, 1};
-    public static int count = 1;
 
-    public static int bfs(int x, int y) {
-        Queue<Integer> queue = new LinkedList<>();
+    public static class Coords {
+        int x;
+        int y;
 
-        queue.add(map[x][y]);
+        Coords(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public static void bfs(int x , int y ) {
+        //store adjacent x,y coords in queue
+        Queue<Coords> queue = new LinkedList<>();
+
+        queue.add(new Coords(x,y));
         isVisited[x][y] = true;
 
         while (!queue.isEmpty()) {
-            int n = queue.poll();
+            Coords coords = queue.poll();
+            int tempX = coords.x;
+            int tempY = coords.y;
 
+            //search quadrant areas of current coords
             for (int j = 0; j < 4; j++) {
-                int nx = x + dx[j];
-                int ny = y + dy[j];
+                int nx = tempX + dx[j];
+                int ny = tempY + dy[j];
 
-                if (nx >= 0 && ny >= 0 && nx <= N && ny <= M) {
+                //check if coords is valid
+                if (nx >= 0 && ny >= 0 && nx < N && ny < M) {
                     if (!isVisited[nx][ny] && map[nx][ny] == 1) {
                         isVisited[nx][ny] = true;
-                        queue.add(map[nx][ny]);
+                        queue.add(new Coords(nx, ny));
+
+                        //put number of movements used from starting position(x,y)
+                        map[nx][ny] = map[tempX][tempY] + 1;
                     }
                 }
             }
-
         }
-
-        return 0;
     }
 
     public static void main(String[] args) {
@@ -55,7 +73,10 @@ public class Q2178 {
             }
         }
 
-        bfs(0, 0);
+        bfs(0,0);
 
+        System.out.println(map[N-1][M-1]);
     }
+
+
 }
