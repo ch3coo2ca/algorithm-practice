@@ -41,7 +41,6 @@ public class Q11780 {
 
         //중간점
         for (int k = 1; k <= n; k++) {
-
             for (int i = 1; i <= n; i++) {  //시작
                 if (k == i) continue;
                 for (int j = 1; j <= n; j++) { //도착
@@ -77,8 +76,8 @@ public class Q11780 {
                         stack.push(pre);
                     }
 
-                    sb.append(stack.size() + 1 + " ");
-                    sb.append(i + " ");
+                    sb.append(stack.size() + 1 + " "); //시작점(+1)
+                    sb.append(i + " "); //시작점 출력
                     while (!stack.empty()) {
                         sb.append(stack.pop() + " ");
                     }
